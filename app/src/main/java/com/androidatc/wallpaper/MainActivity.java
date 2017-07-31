@@ -40,13 +40,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
             case 2:
-                Intent i = new Intent(MainActivity.this, ImagePreview.class);
-                i.putExtra("id", resourceId);
-                startActivity(i);
+                try {
+                    Intent i = new Intent(MainActivity.this, ImagePreview.class);
+                    i.putExtra("id", resourceId);
+                    startActivity(i);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
                 break;
         }
         return true;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,18 +63,24 @@ public class MainActivity extends AppCompatActivity {
         registerForContextMenu(gridView);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.about:
-                Intent i = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(i);
-                break;
+                try {
+                    Intent i = new Intent(MainActivity.this, AboutActivity.class);
+                    startActivity(i);
+                    break;
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
             case R.id.exit:
                 finish();
                 break;
